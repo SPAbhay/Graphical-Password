@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 
 const getRandomNumber = (most) => {
   var num = Math.floor(Math.random() * most) + 1;
@@ -10,30 +10,42 @@ const getName = (id) => {
 	return 
 }
 
-const items = [
-	{id: 1, name: '5-star'},
-	{id: 2, name: 'dairy-milk'},
-	{id: 3, name: 'kitkat'},
-	{id: 4, name: 'perk'},
-	{id: 5, name: 'snickers'},
-	{id: 6, name: 'milky-bar'}
-  ];
+
 
 export default function App() {
-	
+	const [arr, setArr] = useState([
+		{key: '1', name: '5-star', p: './Images/5-star.png'},
+		{key: '2', name: 'Dairy Milk', p: './Images/dairy-milk.png'},
+		{key: '3', name: 'Kitkat', p: './Images/kitkat.png'},
+		{key: '4', name: 'Perk', p: './Images/perk.png'},
+		{key: '5', name: 'Snickers', p: './Images/snickers.png'},
+		{key: '6', name: 'Milky Bar', p: './Images/milky-bar.png'}
+	  ]);
   return (
 	<View style={styles.screen}>
-
-	
-    
       <View style={styles.heading}>
         <Text style={styles.headingText} onTouchEnd={getRandomNumber(5)}>
           CYPHER MAINS
         </Text>
       </View>
       <View style={styles.line}></View>
+	  
       <View style={styles.main}>
-        <View style={styles.row}>
+	  <ScrollView>
+		  {arr.map((x) => {
+
+			  return (
+				<View  key={x.key}>
+					<View>
+					<Image style={styles.img} source={x.p}/>
+					</View>
+					<Text>{x.key} {x.name}</Text>
+				</View>
+			  )
+		  })}
+		  </ScrollView>
+		  
+        {/* <View style={styles.row}>
           <View style={styles.item}>
 		  <Image style={styles.img} source={require("./Images/5-star.png")} />
             <Text style={styles.num}>1</Text>
@@ -62,7 +74,7 @@ export default function App() {
 		  <Image style={styles.img} source={require("./Images/milky-bar.png")} />
             <Text style={styles.num}>6</Text>
           </View>
-        </View>
+        </View> */}
       </View>
     </View>
   );
